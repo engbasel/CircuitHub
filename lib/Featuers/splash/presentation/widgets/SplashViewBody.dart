@@ -68,10 +68,17 @@ class _SplashViewBodyState extends State<SplashViewBody>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Center(child: _buildSplashContent(context)));
+    // Get current theme mode
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
+    return Scaffold(
+      // Use theme-appropriate colors for background
+      backgroundColor: isDarkMode ? AppColors.darkScaffoldColor : Colors.white,
+      body: Center(child: _buildSplashContent(context, isDarkMode)),
+    );
   }
 
-  Widget _buildSplashContent(BuildContext context) {
+  Widget _buildSplashContent(BuildContext context, bool isDarkMode) {
     final double screenWidth = MediaQuery.of(context).size.width;
     final double screenHeight = MediaQuery.of(context).size.height;
 
@@ -80,9 +87,9 @@ class _SplashViewBodyState extends State<SplashViewBody>
       children: [
         _buildAnimatedLogo(screenWidth, screenHeight),
         const SizedBox(height: 24),
-        _buildWelcomeText(screenWidth),
+        _buildWelcomeText(screenWidth, isDarkMode),
         const SizedBox(height: 12),
-        _buildMotivationalText(screenWidth),
+        _buildMotivationalText(screenWidth, isDarkMode),
       ],
     );
   }
@@ -102,17 +109,18 @@ class _SplashViewBodyState extends State<SplashViewBody>
     );
   }
 
-  Widget _buildWelcomeText(double screenWidth) {
+  Widget _buildWelcomeText(double screenWidth, bool isDarkMode) {
     return Text(
       "Welcome to Our Store!",
       style: TextStyle(
         fontSize: screenWidth * 0.07,
         fontWeight: FontWeight.bold,
-        // color: AppColors.primaryText,
-        shadows: const [
+        // Use theme-appropriate text color
+        color: isDarkMode ? Colors.white : Colors.black,
+        shadows: [
           Shadow(
-            // color: AppColors.accent.withOpacity(0.2),
-            offset: Offset(0, 2),
+            color: (isDarkMode ? Colors.white : Colors.black).withOpacity(0.2),
+            offset: const Offset(0, 2),
             blurRadius: 4,
           ),
         ],
@@ -121,13 +129,14 @@ class _SplashViewBodyState extends State<SplashViewBody>
     );
   }
 
-  Widget _buildMotivationalText(double screenWidth) {
+  Widget _buildMotivationalText(double screenWidth, bool isDarkMode) {
     return Text(
       "Shop now & get the best deals!\nEverything you need in one place 🛍️",
       style: TextStyle(
         fontSize: screenWidth * 0.045,
         fontWeight: FontWeight.w500,
-        // color: AppColors.secondaryText,
+        // Use theme-appropriate secondary text color
+        color: isDarkMode ? AppColors.lightCardColor : Colors.black54,
       ),
       textAlign: TextAlign.center,
     );

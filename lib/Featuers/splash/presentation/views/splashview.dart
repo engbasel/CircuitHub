@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:store/Core/Services/shared_preferences_sengleton.dart';
 import 'package:store/Featuers/authUseingProvider/login.dart';
-import 'package:store/Featuers/onboarding/presentation/views/on_boarding_view.dart';
 
 import 'package:store/Featuers/splash/presentation/widgets/SplashViewBody.dart';
 import 'package:store/constans.dart';
-import 'package:store/core/Utils/app_colors.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -26,7 +24,7 @@ class _SplashViewState extends State<SplashView> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      backgroundColor: AppColors.darkScaffoldColor,
+      // backgroundColor: AppColors.darkScaffoldColor,
       body: SplashViewBody(),
     );
   }
@@ -39,13 +37,13 @@ class _SplashViewState extends State<SplashView> {
     );
 
     if (IsOnBoardingViewSeenvalue == true) {
-      Future.delayed(const Duration(seconds: 7), () {
+      Future.delayed(const Duration(seconds: 3), () {
         Navigator.pushReplacementNamed(context, LoginVeiw.routeName);
         // Navigator.pushReplacementNamed(context, SettingsPage.routeName);
       });
     } else {
-      Future.delayed(const Duration(seconds: 7), () {
-        Navigator.pushReplacementNamed(context, OnBoardingView.routeName);
+      Future.delayed(const Duration(seconds: 3), () {
+        Navigator.pushReplacementNamed(context, LoginVeiw.routeName);
         // Navigator.pushReplacementNamed(context, SettingsPage.routeName);
       });
     }
