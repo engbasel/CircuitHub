@@ -15,6 +15,7 @@ import 'package:store/Featuers/authUseingProvider/forgot_password.dart';
 import 'package:store/Featuers/authUseingProvider/forgot_password_view.dart';
 import 'package:store/Featuers/authUseingProvider/login.dart';
 import 'package:store/Featuers/authUseingProvider/register.dart';
+import 'package:store/Featuers/splash/presentation/views/splashview.dart';
 import 'package:store/firebase_options.dart';
 import 'package:store/providers/cart_provider.dart';
 import 'package:store/providers/order_provider.dart';
@@ -74,13 +75,11 @@ class SmartStore extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: Styles.themeData(
               isDarkTheme: themeProvider.getIsDarkTheme, context: context),
-          home: const NavBar(),
+          home: const SplashView(),
           routes: {
             ProductDetails.routeName: (context) => const ProductDetails(),
             Wishlist.routeName: (context) => const Wishlist(),
             ViewedRecently.routeName: (context) => const ViewedRecently(),
-            // SignupView.routeName: (context) => const SignupView(),
-            // SignInView.routeName: (context) => const SignInView(),
             Orders.routeName: (context) => const Orders(),
             ForgotPasswordView.routeName: (context) =>
                 const ForgotPasswordView(),
@@ -90,6 +89,7 @@ class SmartStore extends StatelessWidget {
                 const ForgotPasswordScreen(),
             LoginVeiw.routeName: (context) => const LoginVeiw(),
             RegisterScreen.routeName: (context) => const RegisterScreen(),
+            SplashView.routeName: (context) => const SplashView(),
           },
         );
       }),

@@ -42,6 +42,7 @@ dependencies:
     sdk: flutter
   flutter_bloc: ^8.1.6
   flutter_iconly: ^1.0.2
+  flutter_launcher_icons: ^0.14.3
   flutter_svg: null
   fluttertoast: ^8.2.8
   get_it: ^8.0.0
@@ -110,3 +111,14 @@ flutter_assets:
   output_path: lib/Core/Utils/
   filename: assets.dart
   field_prefix: null
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/electronics/logo.png"
+  min_sdk_android: 21
+  web:
+    generate: true
+    image_path: "assets/electronics/logo.png"
+    background_color: "#ffffff"
+    theme_color: "#000000"
