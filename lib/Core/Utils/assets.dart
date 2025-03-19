@@ -181,23 +181,6 @@ class Assets {
   static const String users_imagesCategoriesPc =
       "assets/Users_images/categories/pc.png";
 
-// ==============================================================================================================
-
-// ==============================================================================================================
-
-  static const String arduino = "assets/electronics/arduino.svg";
-  static const String capacitor = "assets/electronics/capacitor.svg";
-  static const String connectors = "assets/electronics/connectors.svg";
-  static const String diode = "assets/electronics/diode.svg";
-  static const String led = "assets/electronics/led.svg";
-  static const String resistor = "assets/electronics/resistor.svg";
-  static const String sensor = "assets/electronics/sensor.svg";
-  static const String Curicates = "assets/electronics/Curicates.svg";
-  static const String transistors = "assets/electronics/transistors.svg";
-// ==============================================================================================================
-
-// ==============================================================================================================
-
   /// Assets for users_imagesCategoriesShoes
   /// assets/Users_images/categories/shoes.png
   static const String users_imagesCategoriesShoes =
@@ -282,4 +265,24 @@ class Assets {
   /// Assets for users_imagesWarning
   /// assets/Users_images/warning.png
   static const String users_imagesWarning = "assets/Users_images/warning.png";
+
+// ==============================================================================================================
+
+// ==============================================================================================================
+
+  static const String arduino = "assets/electronics/arduino.svg";
+  static const String capacitor = "assets/electronics/capacitor.svg";
+  static const String connectors = "assets/electronics/connectors.svg";
+  static const String diode = "assets/electronics/diode.svg";
+  static const String led = "assets/electronics/led.svg";
+  static const String background1 = "assets/electronics/background1";
+  static const String background2 = "assets/electronics/background2.png";
+  static const String logo = "assets/electronics/logo.png";
+  static const String resistor = "assets/electronics/resistor.svg";
+  static const String sensor = "assets/electronics/sensor.svg";
+  static const String Curicates = "assets/electronics/Curicates.svg";
+  static const String transistors = "assets/electronics/transistors.svg";
+// ==============================================================================================================
+
+// ==============================================================================================================
 }

@@ -21,15 +21,15 @@ import 'package:store/Featuers/authUseingProvider/password_field.dart';
 import 'package:store/Featuers/authUseingProvider/social_login_button.dart';
 import 'package:store/constans.dart';
 
-class LoginScreen extends StatefulWidget {
-  static const routeName = 'LoginScreen';
-  const LoginScreen({super.key});
+class LoginVeiw extends StatefulWidget {
+  static const routeName = 'LoginVeiw';
+  const LoginVeiw({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<LoginVeiw> createState() => _LoginVeiwState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginVeiwState extends State<LoginVeiw> {
   late final TextEditingController _emailController;
   late final TextEditingController _passwordController;
   late final FocusNode _emailFocusNode;

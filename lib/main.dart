@@ -88,7 +88,7 @@ class SmartStore extends StatelessWidget {
             NavBar.routeName: (context) => const NavBar(),
             ForgotPasswordScreen.routeName: (context) =>
                 const ForgotPasswordScreen(),
-            LoginScreen.routeName: (context) => const LoginScreen(),
+            LoginVeiw.routeName: (context) => const LoginVeiw(),
             RegisterScreen.routeName: (context) => const RegisterScreen(),
           },
         );

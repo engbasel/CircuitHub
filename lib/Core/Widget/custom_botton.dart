@@ -8,6 +8,7 @@ class CustomBotton extends StatelessWidget {
       required this.text,
       this.width = double.infinity,
       this.icon,
+      this.background,
       this.widthS,
       this.isIconNeeded = false});
   final VoidCallback onPressed;
@@ -15,6 +16,7 @@ class CustomBotton extends StatelessWidget {
   final double width;
   final double? widthS;
   final IconData? icon;
+  final Color? background;
   final bool isIconNeeded;
 
   @override
@@ -27,7 +29,7 @@ class CustomBotton extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
             ),
-            backgroundColor: const Color(0xffea4438)),
+            backgroundColor: background),
         onPressed: onPressed,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

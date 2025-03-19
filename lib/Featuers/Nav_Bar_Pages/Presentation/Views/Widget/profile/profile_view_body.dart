@@ -326,7 +326,7 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                 label: Text(user == null ? 'LogIn' : 'Logout'),
                 onPressed: () async {
                   if (user == null) {
-                    await Navigator.pushNamed(context, LoginScreen.routeName);
+                    await Navigator.pushNamed(context, LoginVeiw.routeName);
                   } else {
                     await ShowDialogClass.showDialogClass(
                       context: context,
@@ -335,7 +335,7 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                         await FirebaseAuth.instance.signOut();
                         setState(() {});
                         WidgetsBinding.instance.addPostFrameCallback((_) {
-                          Navigator.pushNamed(context, LoginScreen.routeName);
+                          Navigator.pushNamed(context, LoginVeiw.routeName);
                         });
                       },
                       isError: false,
