@@ -223,7 +223,7 @@ class ChatBotViewState extends State<ChatBotView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(context, () {}),
-      backgroundColor: Colors.grey[200], // لون خلفية مريح
+      backgroundColor: Colors.white, // لون خلفية مريح
       body: Column(
         children: [
           Expanded(
