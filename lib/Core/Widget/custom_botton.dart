@@ -9,6 +9,7 @@ class CustomBotton extends StatelessWidget {
       this.width = double.infinity,
       this.icon,
       this.background,
+      this.TextColor,
       this.widthS,
       this.isIconNeeded = false});
   final VoidCallback onPressed;
@@ -17,6 +18,7 @@ class CustomBotton extends StatelessWidget {
   final double? widthS;
   final IconData? icon;
   final Color? background;
+  final Color? TextColor;
   final bool isIconNeeded;
 
   @override
@@ -46,7 +48,7 @@ class CustomBotton extends StatelessWidget {
             ),
             Text(
               style: AppStyles.styleSemiBold18.copyWith(
-                color: Colors.white,
+                color: TextColor,
               ),
               text,
             ),

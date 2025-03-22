@@ -9,7 +9,7 @@ class AppConstans {
 
   static List<String> bannerslmages = [
     Assets.users_imagesBannersBanner1,
-    Assets.users_imagesBannersBanner2
+    Assets.users_imagesBannersBanner2,
   ];
 
   static List<CategoriesModel> categoriesListModel = [
@@ -72,8 +72,9 @@ class MyValidators {
     if (value!.isEmpty) {
       return 'Please enter an email';
     }
-    if (!RegExp(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b')
-        .hasMatch(value)) {
+    if (!RegExp(
+      r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b',
+    ).hasMatch(value)) {
       return 'Please enter a valid email';
     }
     return null;
