@@ -6,6 +6,7 @@ import 'package:store/Core/Services/custom_block_observer.dart';
 import 'package:store/Core/Services/shared_preferences_sengleton.dart';
 import 'package:store/Core/Utils/theme_data.dart';
 import 'package:store/Core/Widget/nav_bar.dart';
+import 'package:store/Featuers/Chat/presentation/views/chat_bot_view_body.dart';
 import 'package:store/Featuers/Nav_Bar_Pages/Presentation/Views/Widget/inner_widget/orders.dart';
 import 'package:store/Featuers/Nav_Bar_Pages/Presentation/Views/Widget/inner_widget/product_details.dart';
 import 'package:store/Featuers/Nav_Bar_Pages/Presentation/Views/Widget/inner_widget/viewed_recently.dart';
@@ -90,6 +91,7 @@ class SmartStore extends StatelessWidget {
             LoginVeiw.routeName: (context) => const LoginVeiw(),
             RegisterScreen.routeName: (context) => const RegisterScreen(),
             SplashView.routeName: (context) => const SplashView(),
+            'ChatBotViewBody': (context) => const ChatBotViewBody(),
           },
         );
       }),
