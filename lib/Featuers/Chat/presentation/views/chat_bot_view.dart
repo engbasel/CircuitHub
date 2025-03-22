@@ -2,12 +2,9 @@
 import 'package:dash_chat_2/dash_chat_2.dart' show ChatMessage, ChatUser;
 import 'package:flutter/material.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:store/Core/Utils/app_colors.dart';
 import 'package:store/Core/Utils/assets.dart';
 import 'package:store/Featuers/Chat/presentation/views/ChatController.dart';
-import 'package:store/Featuers/Chat/presentation/views/MessageInput.dart';
-import 'package:store/Featuers/Chat/presentation/views/MessageItem.dart';
+import 'package:store/Featuers/Chat/presentation/views/buildAppBar.dart';
 
 class ChatBotView extends StatefulWidget {
   const ChatBotView({super.key});
@@ -46,7 +43,7 @@ class ChatBotViewState extends State<ChatBotView> {
       _currentUser = ChatUser(
         id: "user123",
         firstName: "You",
-        profileImage: "assets/images/default-avatar.png",
+        profileImage: Assets.admin_imagesCategoriesMobiles,
       );
     });
   }
@@ -119,30 +116,6 @@ class ChatBotViewState extends State<ChatBotView> {
           "Sorry, something went wrong. Please try again later.");
     }
   }
-
-  // bool _isElectronicsRelated(String text) {
-  //   // Add your logic here to determine if the text is related to electronics and electronic circuits
-  //   // This can be done using keyword matching, a machine learning model, or any other method
-  //   // For simplicity, this example will use keyword matching
-  //   final electronicsKeywords = [
-  //     "electronics",
-  //     "circuit",
-  //     "resistor",
-  //     "capacitor",
-  //     "transistor",
-  //     "diode",
-  //     "IC",
-  //     "PCB",
-  //     "schematic"
-  //   ];
-
-  //   for (var keyword in electronicsKeywords) {
-  //     if (text.toLowerCase().contains(keyword)) {
-  //       return true;
-  //     }
-  //   }
-  //   return false;
-  // }
 
   bool _isElectronicsRelated(String text) {
     if (text.trim().isEmpty) return false; // Prevents unnecessary processing
@@ -239,50 +212,6 @@ class ChatBotViewState extends State<ChatBotView> {
     });
   }
 
-  AppBar buildAppBar(BuildContext context) {
-    return AppBar(
-      backgroundColor: AppColors.darkPrimary,
-      title: const Text("Chat Bot"),
-      centerTitle: true,
-      leading: IconButton(
-        icon: const Icon(Icons.arrow_back, color: Colors.white),
-        onPressed: () => Navigator.pop(context),
-      ),
-      actions: [
-        PopupMenuButton<String>(
-          onSelected: (value) {
-            if (value == 'new_chat') {
-              setState(() {
-                _messages.clear();
-              });
-            }
-          },
-          itemBuilder: (context) => [
-            const PopupMenuItem(
-              value: 'new_chat',
-              child: Row(
-                children: [
-                  Icon(Icons.add, color: AppColors.darkPrimary),
-                  SizedBox(width: 10),
-                  Text(
-                    "Start New Chat",
-                    style:
-                        TextStyle(fontSize: 16, color: AppColors.darkPrimary),
-                  ),
-                ],
-              ),
-            ),
-          ],
-          icon: const Icon(Icons.more_vert, color: Colors.white),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          elevation: 4,
-          color: Colors.white,
-        ),
-      ],
-    );
-  }
-
   @override
   void dispose() {
     _scrollController.dispose();
@@ -293,54 +222,129 @@ class ChatBotViewState extends State<ChatBotView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar(context),
-      backgroundColor: Colors.white,
-      body: Directionality(
-        textDirection: TextDirection.ltr,
-        child: Stack(
-          children: [
-            Positioned.fill(
-              child: Opacity(
-                opacity: 0.2,
-                child: Center(
-                  child: SvgPicture.asset(
-                    Assets.admin_imagesCategoriesBookImg,
-                    colorFilter: ColorFilter.mode(
-                      AppColors.darkPrimary.withOpacity(0.5),
-                      BlendMode.modulate,
-                    ),
-                    width: 200,
-                    height: 100,
-                  ),
+      appBar: buildAppBar(context, () {}),
+      backgroundColor: Colors.grey[200], // لون خلفية مريح
+      body: Column(
+        children: [
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(Assets.logo), // صورة خلفية ناعمة
+                  fit: BoxFit.cover,
+                  opacity: 0.1,
                 ),
               ),
+              child: ListView.builder(
+                controller: _scrollController,
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                itemCount: _messages.length,
+                itemBuilder: (context, index) {
+                  final message = _messages[index];
+                  final isUser = message.user.id == _currentUser?.id;
+
+                  return Align(
+                    alignment:
+                        isUser ? Alignment.centerRight : Alignment.centerLeft,
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(vertical: 5),
+                      padding: const EdgeInsets.all(12),
+                      constraints: BoxConstraints(
+                        maxWidth: MediaQuery.of(context).size.width * 0.75,
+                      ),
+                      decoration: BoxDecoration(
+                        color: isUser ? Colors.blueAccent : Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topLeft: const Radius.circular(15),
+                          topRight: const Radius.circular(15),
+                          bottomLeft:
+                              isUser ? const Radius.circular(15) : Radius.zero,
+                          bottomRight:
+                              isUser ? Radius.zero : const Radius.circular(15),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 5,
+                            offset: const Offset(2, 2),
+                          ),
+                        ],
+                      ),
+                      child: Text(
+                        message.text,
+                        style: TextStyle(
+                          color: isUser ? Colors.white : Colors.black87,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
             ),
-            Column(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                    controller: _scrollController,
-                    padding: const EdgeInsets.all(8.0),
-                    itemCount: _messages.length,
-                    reverse: false,
-                    itemBuilder: (context, index) {
-                      final message = _messages[index];
-                      return MessageItem(
-                        message: message,
-                        currentUser: _currentUser,
-                        botUser: _botUser,
-                      );
-                    },
-                  ),
-                ),
-                MessageInput(
-                  messageController: _messageController,
-                  onSend: _sendMessage,
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(30),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.05),
+                  blurRadius: 8,
+                  offset: const Offset(0, 3),
                 ),
               ],
             ),
-          ],
-        ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: _messageController,
+                    decoration: InputDecoration(
+                      hintText: "Type a message...",
+                      hintStyle: TextStyle(color: Colors.grey[500]),
+                      border: InputBorder.none,
+                      filled: true,
+                      fillColor: Colors.grey[100],
+                      contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 12),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(25),
+                        borderSide: BorderSide(color: Colors.grey[300]!),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(25),
+                        borderSide: const BorderSide(color: Colors.blueAccent),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                GestureDetector(
+                  onTap: () => _sendMessage(_messageController.text),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.blueAccent,
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.blueAccent.withOpacity(0.3),
+                          blurRadius: 10,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
+                    ),
+                    padding: const EdgeInsets.all(12),
+                    child:
+                        const Icon(Icons.send, color: Colors.white, size: 24),
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
       ),
     );
   }
