@@ -2,11 +2,9 @@ import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:store/Core/Utils/my_app_method.dart';
-import 'package:store/Core/Utils/my_app_method.dart';
 import 'package:store/Featuers/Nav_Bar_Pages/Models/product_model.dart';
 import 'package:store/Featuers/Nav_Bar_Pages/Presentation/Views/Widget/inner_widget/product_details.dart';
 import 'package:store/providers/viewed_prod_provider.dart';
-import 'package:store/Featuers/Nav_Bar_Pages/Models/product_model.dart';
 import 'package:store/Core/Utils/app_styles.dart';
 import 'package:store/Core/Widget/heart_botton.dart';
 

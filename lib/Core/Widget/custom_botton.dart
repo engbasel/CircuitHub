@@ -9,6 +9,7 @@ class CustomBotton extends StatelessWidget {
       this.width = double.infinity,
       this.icon,
       this.background,
+      // ignore: non_constant_identifier_names
       this.TextColor,
       this.widthS,
       this.isIconNeeded = false});
@@ -18,6 +19,7 @@ class CustomBotton extends StatelessWidget {
   final double? widthS;
   final IconData? icon;
   final Color? background;
+  // ignore: non_constant_identifier_names
   final Color? TextColor;
   final bool isIconNeeded;
 

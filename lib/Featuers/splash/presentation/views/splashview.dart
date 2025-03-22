@@ -31,6 +31,7 @@ class _SplashViewState extends State<SplashView> {
 
   /// Navigate to the onboarding screen after a delay of 3 seconds.
   void _navigateToOnboarding() {
+    // ignore: non_constant_identifier_names
     var IsOnBoardingViewSeenvalue = Prefs.getBool(
       kIsOnBoardingViewSeen,
       true,
@@ -38,11 +39,13 @@ class _SplashViewState extends State<SplashView> {
 
     if (IsOnBoardingViewSeenvalue == true) {
       Future.delayed(const Duration(seconds: 3), () {
+        // ignore: use_build_context_synchronously
         Navigator.pushReplacementNamed(context, LoginVeiw.routeName);
         // Navigator.pushReplacementNamed(context, SettingsPage.routeName);
       });
     } else {
       Future.delayed(const Duration(seconds: 3), () {
+        // ignore: use_build_context_synchronously
         Navigator.pushReplacementNamed(context, LoginVeiw.routeName);
         // Navigator.pushReplacementNamed(context, SettingsPage.routeName);
       });

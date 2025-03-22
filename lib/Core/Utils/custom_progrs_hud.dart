@@ -17,6 +17,7 @@ class CustomProgressHUD extends StatelessWidget {
         child,
         if (isLoading) ...[
           Container(
+            // ignore: deprecated_member_use
             color: Colors.blue.withOpacity(0.7),
             child: const Center(
               child: Row(

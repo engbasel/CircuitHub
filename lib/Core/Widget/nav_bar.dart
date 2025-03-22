@@ -5,7 +5,6 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
 import 'package:store/Featuers/Nav_Bar_Pages/Presentation/Views/Widget/home/home_view.dart';
 import 'package:store/Featuers/Nav_Bar_Pages/Presentation/Views/Widget/cart/cart_view.dart';
-import 'package:store/Featuers/Nav_Bar_Pages/Presentation/Views/Widget/home/home_view.dart';
 import 'package:store/Featuers/Nav_Bar_Pages/Presentation/Views/Widget/profile/profile_view.dart';
 import 'package:store/Featuers/Nav_Bar_Pages/Presentation/Views/Widget/search/search_view.dart';
 

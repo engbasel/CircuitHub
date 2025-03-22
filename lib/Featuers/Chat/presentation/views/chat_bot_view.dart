@@ -265,6 +265,7 @@ class ChatBotViewState extends State<ChatBotView> {
                         ),
                         boxShadow: [
                           BoxShadow(
+                            // ignore: deprecated_member_use
                             color: Colors.black.withOpacity(0.1),
                             blurRadius: 5,
                             offset: const Offset(2, 2),
@@ -291,6 +292,7 @@ class ChatBotViewState extends State<ChatBotView> {
               borderRadius: BorderRadius.circular(30),
               boxShadow: [
                 BoxShadow(
+                  // ignore: deprecated_member_use
                   color: Colors.black.withOpacity(0.05),
                   blurRadius: 8,
                   offset: const Offset(0, 3),
@@ -330,6 +332,7 @@ class ChatBotViewState extends State<ChatBotView> {
                       shape: BoxShape.circle,
                       boxShadow: [
                         BoxShadow(
+                          // ignore: deprecated_member_use
                           color: Colors.blueAccent.withOpacity(0.3),
                           blurRadius: 10,
                           offset: const Offset(0, 4),

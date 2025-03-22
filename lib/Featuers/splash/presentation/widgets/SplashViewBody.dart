@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:store/Core/Utils/app_colors.dart';
 import 'package:store/Core/Utils/assets.dart';
@@ -7,6 +9,7 @@ class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _SplashViewBodyState createState() => _SplashViewBodyState();
 }
 
@@ -119,6 +122,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
         color: isDarkMode ? Colors.white : Colors.black,
         shadows: [
           Shadow(
+            // ignore: deprecated_member_use
             color: (isDarkMode ? Colors.white : Colors.black).withOpacity(0.2),
             offset: const Offset(0, 2),
             blurRadius: 4,
