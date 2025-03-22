@@ -72,7 +72,6 @@ flutter:
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
   assets:
-
     - assets/admin_images/
     - assets/electronics/
     - assets/admin_images/categories/
@@ -82,6 +81,7 @@ flutter:
     - assets/Users_images/banners/
     - assets/Users_images/categories/
     - assets/Users_images/profile/
+    - shorebird.yaml
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
   # For details regarding adding assets from package dependencies, see
