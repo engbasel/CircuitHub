@@ -8,6 +8,7 @@ import 'package:store/Core/Utils/assets.dart';
 import 'package:store/Core/Widget/custom_text_field_.dart';
 import 'package:store/Core/Widget/empty_widget.dart';
 import 'package:store/Core/Widget/product_widget.dart';
+import 'package:store/Featuers/Nav_Bar_Pages/Presentation/Views/Widget/search/HelpingWidget.dart';
 import 'package:store/constans.dart';
 import 'package:store/providers/product_provider.dart';
 
@@ -112,10 +113,7 @@ class _SearchViewBodyState extends State<SearchViewBody> {
                         if (searchTextController.text.isNotEmpty &&
                             productListSearch.isEmpty) ...[
                           const Center(
-                            child: Text(
-                              'No results found',
-                              style: AppStyles.styleRegular16,
-                            ),
+                            child: HelpingWidget(),
                           ),
                         ],
                         Expanded(
