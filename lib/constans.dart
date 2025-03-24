@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:store/Core/Utils/assets.dart';
 import 'package:store/Featuers/Nav_Bar_Pages/Models/categories_model.dart';
 
@@ -11,44 +12,59 @@ class AppConstans {
     Assets.users_imagesBannersBanner1,
     Assets.users_imagesBannersBanner2,
   ];
-
   static List<CategoriesModel> categoriesListModel = [
     CategoriesModel(
+      colorDark: Colors.blueGrey.shade900,
+      colorLight: Colors.blueGrey.shade300,
       image: Assets.resistor,
       name: 'Resistors',
       id: Assets.users_imagesCategoriesBookImg,
     ),
     CategoriesModel(
+      colorDark: Colors.orange.shade900,
+      colorLight: Colors.orange.shade300,
       image: Assets.capacitor,
       name: 'Capacitors',
       id: Assets.users_imagesCategoriesBookImg,
     ),
     CategoriesModel(
+      colorDark: Colors.teal.shade900,
+      colorLight: Colors.teal.shade300,
       image: Assets.transistors,
       name: 'Transistors',
       id: Assets.users_imagesCategoriesBookImg,
     ),
     CategoriesModel(
+      colorDark: Colors.indigo.shade900,
+      colorLight: Colors.indigo.shade300,
       image: Assets.arduino,
-      name: 'controllers',
+      name: 'Controllers',
       id: Assets.users_imagesCategoriesBookImg,
     ),
     CategoriesModel(
+      colorDark: Colors.green.shade900,
+      colorLight: Colors.green.shade300,
       image: Assets.sensor,
       name: 'Sensors',
       id: Assets.users_imagesCategoriesBookImg,
     ),
     CategoriesModel(
+      colorDark: Colors.red.shade900,
+      colorLight: Colors.red.shade300,
       image: Assets.diode,
       name: 'Diodes',
       id: Assets.users_imagesCategoriesBookImg,
     ),
     CategoriesModel(
+      colorDark: Colors.purple.shade900,
+      colorLight: Colors.purple.shade300,
       image: Assets.Curicates,
       name: 'Circuits',
       id: Assets.users_imagesCategoriesBookImg,
     ),
     CategoriesModel(
+      colorDark: Colors.brown.shade900,
+      colorLight: Colors.brown.shade300,
       image: Assets.connectors,
       name: 'Connector',
       id: Assets.users_imagesCategoriesBookImg,

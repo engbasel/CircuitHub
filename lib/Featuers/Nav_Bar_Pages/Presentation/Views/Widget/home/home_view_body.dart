@@ -24,6 +24,7 @@ class HomeViewBody extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             const GraidViewCont(),
+            const SizedBox(height: 20),
           ],
         ),
       ),

@@ -16,6 +16,8 @@ class GraidViewCont extends StatelessWidget {
         AppConstans.categoriesListModel.length,
         (index) {
           return CategoreHomeWidget(
+            iconColorDark: AppConstans.categoriesListModel[index].colorDark,
+            iconColorWith: AppConstans.categoriesListModel[index].colorLight,
             image: AppConstans.categoriesListModel[index].image,
             name: AppConstans.categoriesListModel[index].name,
           );
