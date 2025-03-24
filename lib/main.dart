@@ -17,7 +17,7 @@ import 'package:store/Featuers/authUseingProvider/forgot_password_view.dart';
 import 'package:store/Featuers/authUseingProvider/login.dart';
 import 'package:store/Featuers/authUseingProvider/register.dart';
 import 'package:store/Featuers/splash/presentation/views/splashview.dart';
-import 'package:store/custom_bottom_nav_bar.dart';
+import 'package:store/Core/Widget/custom_bottom_nav_bar.dart';
 import 'package:store/firebase_options.dart';
 import 'package:store/providers/cart_provider.dart';
 import 'package:store/providers/order_provider.dart';

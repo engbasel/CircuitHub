@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lottie/lottie.dart';
-import 'package:store/Core/Utils/app_colors.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:store/Core/Utils/assets.dart';
 import 'package:store/Featuers/Chat/presentation/views/chat_bot_view.dart';
 import 'package:store/Featuers/Nav_Bar_Pages/Presentation/Views/Widget/cart/cart_view.dart';
@@ -133,14 +133,19 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
       onPressed: () {
         Navigator.of(context).pushNamed(ChatBotView.routeName);
       },
-      backgroundColor: AppColors.lightCardColor,
-      child: Lottie.asset(
-        'assets/electronics/Chatbot.json',
-        height: 40,
-        width: 40,
-        fit: BoxFit.contain,
-        repeat: shouldAnimateLottie,
-        animate: shouldAnimateLottie,
+      // backgroundColor: AppColors.lightCardColor,
+      backgroundColor: Colors.white,
+      child: Shimmer.fromColors(
+        baseColor: Colors.purple,
+        highlightColor: Colors.red,
+        child: Lottie.asset(
+          'assets/electronics/Chatbot.json',
+          height: 40,
+          width: 40,
+          fit: BoxFit.contain,
+          repeat: shouldAnimateLottie,
+          animate: shouldAnimateLottie,
+        ),
       ),
     );
   }
@@ -156,7 +161,8 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
         asset,
         height: 30,
       ),
-      selectedColor: AppColors.lightCardColor,
+      selectedColor: Colors.red,
+      unSelectedColor: Colors.green,
       title: Text(label),
     );
   }

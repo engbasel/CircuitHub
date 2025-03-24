@@ -17,7 +17,7 @@ import 'package:store/Featuers/authUseingProvider/have_an_account_widget.dart';
 import 'package:store/Featuers/authUseingProvider/password_field.dart';
 import 'package:store/Featuers/authUseingProvider/pick_image_widget.dart';
 import 'package:store/constans.dart';
-import 'package:store/custom_bottom_nav_bar.dart';
+import 'package:store/Core/Widget/custom_bottom_nav_bar.dart';
 
 class RegisterScreen extends StatefulWidget {
   static const routeName = '/RegisterScreen';

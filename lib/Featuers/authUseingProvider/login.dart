@@ -19,7 +19,7 @@ import 'package:store/Featuers/authUseingProvider/or_divider.dart';
 import 'package:store/Featuers/authUseingProvider/password_field.dart';
 import 'package:store/Featuers/authUseingProvider/social_login_button.dart';
 import 'package:store/constans.dart';
-import 'package:store/custom_bottom_nav_bar.dart';
+import 'package:store/Core/Widget/custom_bottom_nav_bar.dart';
 
 class LoginVeiw extends StatefulWidget {
   static const routeName = 'LoginVeiw';

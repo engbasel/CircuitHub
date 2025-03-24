@@ -12,7 +12,7 @@ import 'package:store/Core/Utils/my_app_method.dart';
 import 'dart:developer';
 
 import 'package:store/Featuers/authUseingProvider/social_login_button.dart';
-import 'package:store/custom_bottom_nav_bar.dart';
+import 'package:store/Core/Widget/custom_bottom_nav_bar.dart';
 
 class GoogleButton extends StatefulWidget {
   const GoogleButton({super.key});
