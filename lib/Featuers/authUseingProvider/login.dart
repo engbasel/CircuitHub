@@ -10,7 +10,7 @@ import 'package:store/Core/Utils/assets.dart';
 import 'package:store/Core/Utils/loading_manager.dart';
 import 'package:store/Core/Widget/custom_botton.dart';
 import 'package:store/Core/Widget/custom_text_field.dart';
-import 'package:store/Core/Widget/nav_bar.dart';
+
 import 'package:store/Core/errors/exceptions.dart';
 import 'package:store/Featuers/authUseingProvider/dont_have_an_account_widget.dart';
 import 'package:store/Featuers/authUseingProvider/forgot_password_view.dart';
@@ -19,6 +19,7 @@ import 'package:store/Featuers/authUseingProvider/or_divider.dart';
 import 'package:store/Featuers/authUseingProvider/password_field.dart';
 import 'package:store/Featuers/authUseingProvider/social_login_button.dart';
 import 'package:store/constans.dart';
+import 'package:store/custom_bottom_nav_bar.dart';
 
 class LoginVeiw extends StatefulWidget {
   static const routeName = 'LoginVeiw';
@@ -79,7 +80,7 @@ class _LoginVeiwState extends State<LoginVeiw> {
         'Login Successful',
       );
 
-      Navigator.pushReplacementNamed(context, NavBar.routeName);
+      Navigator.pushReplacementNamed(context, CustomBottomNavBar.routeName);
 
       return credential.user;
     } on FirebaseAuthException catch (e) {
@@ -271,7 +272,8 @@ class _LoginVeiwState extends State<LoginVeiw> {
                         ),
                         SocialLoginButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, NavBar.routeName);
+                            Navigator.pushNamed(
+                                context, CustomBottomNavBar.routeName);
                           },
                           image: Assets.users_imagesGuest,
                           tital: 'Sign in as Guest',

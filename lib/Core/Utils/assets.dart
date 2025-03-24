@@ -274,11 +274,14 @@ class Assets {
   static const String capacitor = "assets/electronics/capacitor.svg";
   static const String connectors = "assets/electronics/connectors.svg";
   static const String diode = "assets/electronics/diode.svg";
+  static const String favorites = "assets/electronics/favorites.svg";
   static const String led = "assets/electronics/led.svg";
+  static const String search = "assets/electronics/search.svg";
   static const String background1 = "assets/electronics/background1";
   static const String background2 = "assets/electronics/background2.png";
   static const String logo = "assets/electronics/logo.png";
   static const String resistor = "assets/electronics/resistor.svg";
+  static const String Profile = "assets/electronics/Profile.svg";
   static const String sensor = "assets/electronics/sensor.svg";
   static const String Curicates = "assets/electronics/Curicates.svg";
   static const String transistors = "assets/electronics/transistors.svg";

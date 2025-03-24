@@ -12,12 +12,12 @@ import 'package:store/Core/Utils/loading_manager.dart';
 import 'package:store/Core/Utils/my_app_method.dart';
 import 'package:store/Core/Widget/custom_botton.dart';
 import 'package:store/Core/Widget/custom_text_field.dart';
-import 'package:store/Core/Widget/nav_bar.dart';
 
 import 'package:store/Featuers/authUseingProvider/have_an_account_widget.dart';
 import 'package:store/Featuers/authUseingProvider/password_field.dart';
 import 'package:store/Featuers/authUseingProvider/pick_image_widget.dart';
 import 'package:store/constans.dart';
+import 'package:store/custom_bottom_nav_bar.dart';
 
 class RegisterScreen extends StatefulWidget {
   static const routeName = '/RegisterScreen';
@@ -116,7 +116,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           textColor: Colors.white,
         );
         if (!mounted) return;
-        Navigator.pushReplacementNamed(context, NavBar.routeName);
+        Navigator.pushReplacementNamed(context, CustomBottomNavBar.routeName);
       } on FirebaseAuthException catch (error) {
         await MyAppMethods.showErrorORWarningDialog(
           context: context,

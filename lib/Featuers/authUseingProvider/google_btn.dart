@@ -8,10 +8,11 @@ import 'package:store/Core/Helper_Functions/scccess_top_snak_bar.dart';
 import 'package:store/Core/Utils/assets.dart';
 import 'package:store/Core/Utils/loading_manager.dart';
 import 'package:store/Core/Utils/my_app_method.dart';
-import 'package:store/Core/Widget/nav_bar.dart';
+
 import 'dart:developer';
 
 import 'package:store/Featuers/authUseingProvider/social_login_button.dart';
+import 'package:store/custom_bottom_nav_bar.dart';
 
 class GoogleButton extends StatefulWidget {
   const GoogleButton({super.key});
@@ -74,7 +75,7 @@ class _GoogleButtonState extends State<GoogleButton> {
         // Navigate to the main screen after login
         if (!mounted) return null;
 
-        Navigator.pushReplacementNamed(context, NavBar.routeName);
+        Navigator.pushReplacementNamed(context, CustomBottomNavBar.routeName);
         succesTopSnackBar(
           context,
           'Wellcome ${user.displayName}',

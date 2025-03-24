@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:store/Core/Services/custom_block_observer.dart';
 import 'package:store/Core/Services/shared_preferences_sengleton.dart';
 import 'package:store/Core/Utils/theme_data.dart';
-import 'package:store/Core/Widget/nav_bar.dart';
+
 import 'package:store/Featuers/Chat/presentation/views/chat_bot_view.dart';
 import 'package:store/Featuers/Nav_Bar_Pages/Presentation/Views/Widget/inner_widget/orders.dart';
 import 'package:store/Featuers/Nav_Bar_Pages/Presentation/Views/Widget/inner_widget/product_details.dart';
@@ -17,6 +17,7 @@ import 'package:store/Featuers/authUseingProvider/forgot_password_view.dart';
 import 'package:store/Featuers/authUseingProvider/login.dart';
 import 'package:store/Featuers/authUseingProvider/register.dart';
 import 'package:store/Featuers/splash/presentation/views/splashview.dart';
+import 'package:store/custom_bottom_nav_bar.dart';
 import 'package:store/firebase_options.dart';
 import 'package:store/providers/cart_provider.dart';
 import 'package:store/providers/order_provider.dart';
@@ -85,7 +86,8 @@ class SmartStore extends StatelessWidget {
             ForgotPasswordView.routeName: (context) =>
                 const ForgotPasswordView(),
             SearchView.routeName: (context) => const SearchView(),
-            NavBar.routeName: (context) => const NavBar(),
+            CustomBottomNavBar.routeName: (context) =>
+                const CustomBottomNavBar(),
             ForgotPasswordScreen.routeName: (context) =>
                 const ForgotPasswordScreen(),
             LoginVeiw.routeName: (context) => const LoginVeiw(),
