@@ -11,6 +11,7 @@ import 'package:store/Featuers/Nav_Bar_Pages/Presentation/Views/Widget/inner_wid
 import 'package:store/Featuers/Nav_Bar_Pages/Presentation/Views/Widget/inner_widget/product_details.dart';
 import 'package:store/Featuers/Nav_Bar_Pages/Presentation/Views/Widget/inner_widget/viewed_recently.dart';
 import 'package:store/Featuers/Nav_Bar_Pages/Presentation/Views/Widget/inner_widget/wishlist.dart';
+import 'package:store/Featuers/Nav_Bar_Pages/Presentation/Views/Widget/search/AI_assestnat_chat.dart';
 import 'package:store/Featuers/Nav_Bar_Pages/Presentation/Views/Widget/search/search_view.dart';
 import 'package:store/Featuers/authUseingProvider/forgot_password.dart';
 import 'package:store/Featuers/authUseingProvider/forgot_password_view.dart';
@@ -95,6 +96,7 @@ class SmartStore extends StatelessWidget {
             RegisterScreen.routeName: (context) => const RegisterScreen(),
             SplashView.routeName: (context) => const SplashView(),
             ChatBotView.routeName: (context) => const ChatBotView(),
+            AIAssistant.routeName: (context) => const AIAssistant(),
           },
         );
       }),
