@@ -9,6 +9,8 @@ class CategoreHomeWidget extends StatelessWidget {
   const CategoreHomeWidget(
       {super.key, required this.image, required this.name});
   final String image, name;
+
+  // ignore: deprecated_member_use_from_same_package
   @override
   Widget build(BuildContext context) {
     bool isDarkTheme = Theme.of(context).brightness == Brightness.dark;
@@ -25,7 +27,7 @@ class CategoreHomeWidget extends StatelessWidget {
         children: [
           SvgPicture.asset(
             image,
-            color: isDarkTheme ? Colors.white : Colors.black, // Dynamic color
+            color: isDarkTheme ? IconColorDark : IconColorWith, // Dynamic color
             height: 50,
             width: 50,
             fit: BoxFit.fill,

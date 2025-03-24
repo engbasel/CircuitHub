@@ -68,6 +68,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       extendBody: true,
       bottomNavigationBar: _buildBottomBar(),
       floatingActionButton: _buildFloatingActionButton(),
@@ -105,7 +106,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
           ),
         ),
         items: [
-          _buildBottomBarItem(Assets.Curicates, 'Home'),
+          _buildBottomBarItem(Assets.Home, 'Home'),
           _buildBottomBarItem(Assets.search, 'Search'),
           _buildBottomBarItem(Assets.favorites, 'favorites'),
           _buildBottomBarItem(Assets.Profile, 'Profile'),

@@ -77,7 +77,8 @@ class SmartStore extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: Styles.themeData(
               isDarkTheme: themeProvider.getIsDarkTheme, context: context),
-          home: const SplashView(),
+          // home: const SplashView(),
+          home: const CustomBottomNavBar(),
           routes: {
             ProductDetails.routeName: (context) => const ProductDetails(),
             Wishlist.routeName: (context) => const Wishlist(),
@@ -93,7 +94,7 @@ class SmartStore extends StatelessWidget {
             LoginVeiw.routeName: (context) => const LoginVeiw(),
             RegisterScreen.routeName: (context) => const RegisterScreen(),
             SplashView.routeName: (context) => const SplashView(),
-            'ChatBotViewBody': (context) => const ChatBotView(),
+            ChatBotView.routeName: (context) => const ChatBotView(),
           },
         );
       }),

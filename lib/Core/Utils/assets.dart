@@ -283,6 +283,7 @@ class Assets {
   static const String resistor = "assets/electronics/resistor.svg";
   static const String Profile = "assets/electronics/Profile.svg";
   static const String sensor = "assets/electronics/sensor.svg";
+  static const String Home = "assets/electronics/home_icon.svg";
   static const String Curicates = "assets/electronics/Curicates.svg";
   static const String transistors = "assets/electronics/transistors.svg";
 // ==============================================================================================================
