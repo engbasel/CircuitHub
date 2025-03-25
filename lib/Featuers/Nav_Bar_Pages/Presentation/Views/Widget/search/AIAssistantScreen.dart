@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:store/Featuers/Nav_Bar_Pages/Presentation/Views/Widget/search/widgets/ComponentsToProjectsScreen.dart';
+import 'package:store/Featuers/Nav_Bar_Pages/Presentation/Views/Widget/search/widgets/IdeaToComponentsScreen.dart';
 
 class AIAssistantEngginering extends StatefulWidget {
   const AIAssistantEngginering({super.key});
@@ -46,44 +48,6 @@ class _AIAssistantEnggineringState extends State<AIAssistantEngginering>
           IdeaToComponentsScreen(),
           ComponentsToProjectsScreen(),
         ],
-      ),
-    );
-  }
-}
-
-class IdeaToComponentsScreen extends StatelessWidget {
-  const IdeaToComponentsScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(color: Colors.red),
-        child: const Center(
-          child: Text(
-            'This is the Idea to Components Screen',
-            style: TextStyle(fontSize: 18, color: Colors.white),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class ComponentsToProjectsScreen extends StatelessWidget {
-  const ComponentsToProjectsScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(color: Colors.green),
-        child: const Center(
-          child: Text(
-            'This is the Components to Projects Screen',
-            style: TextStyle(fontSize: 18, color: Colors.white),
-          ),
-        ),
       ),
     );
   }
