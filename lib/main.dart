@@ -98,7 +98,8 @@ class SmartStore extends StatelessWidget {
             SplashView.routeName: (context) => const SplashView(),
             ChatBotView.routeName: (context) => const ChatBotView(),
             AIAssistant.routeName: (context) => const AIAssistant(),
-            AIAssistantScreen.routeName: (context) => const AIAssistantScreen(),
+            AIAssistantEngginering.routeName: (context) =>
+                const AIAssistantEngginering(),
           },
         );
       }),

@@ -76,7 +76,7 @@ class HelpingWidget extends StatelessWidget {
               Navigator.pushNamed(
                 context,
                 // AIAssistant.routeName,
-                AIAssistantScreen.routeName,
+                AIAssistantEngginering.routeName,
               ); // Replace with your actual route
             },
             style: ElevatedButton.styleFrom(

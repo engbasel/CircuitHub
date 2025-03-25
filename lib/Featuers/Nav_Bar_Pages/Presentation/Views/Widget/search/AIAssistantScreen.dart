@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 
-class AIAssistantScreen extends StatefulWidget {
-  const AIAssistantScreen({super.key});
+class AIAssistantEngginering extends StatefulWidget {
+  const AIAssistantEngginering({super.key});
 
   @override
-  State<AIAssistantScreen> createState() => _AIAssistantScreenState();
+  State<AIAssistantEngginering> createState() => _AIAssistantEnggineringState();
   static const routeName = 'AIAssistantScreen';
 }
 
-class _AIAssistantScreenState extends State<AIAssistantScreen>
+class _AIAssistantEnggineringState extends State<AIAssistantEngginering>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   final TextEditingController _inputController = TextEditingController();
