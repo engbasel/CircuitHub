@@ -12,8 +12,6 @@ class AIAssistantEngginering extends StatefulWidget {
 class _AIAssistantEnggineringState extends State<AIAssistantEngginering>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  final TextEditingController _inputController = TextEditingController();
-  String? aiResponse;
 
   @override
   void initState() {
@@ -24,15 +22,7 @@ class _AIAssistantEnggineringState extends State<AIAssistantEngginering>
   @override
   void dispose() {
     _tabController.dispose();
-    _inputController.dispose();
     super.dispose();
-  }
-
-  void _fetchAIResponse() {
-    setState(() {
-      aiResponse = "AI is processing your request...";
-    });
-    // TODO: Integrate AI logic here
   }
 
   @override
@@ -52,99 +42,49 @@ class _AIAssistantEnggineringState extends State<AIAssistantEngginering>
       ),
       body: TabBarView(
         controller: _tabController,
-        children: [
-          Container(
-            decoration: const BoxDecoration(
-              color: Colors.red,
-            ),
-            child: const Text(
-              '11111111111111',
-            ),
-          ),
-          Container(
-            decoration: const BoxDecoration(
-              color: Colors.green,
-            ),
-            child: const Text(
-              '22222222222222',
-            ),
-          ),
+        children: const [
+          IdeaToComponentsScreen(),
+          ComponentsToProjectsScreen(),
         ],
       ),
     );
   }
+}
 
-  // Widget _buildIdeaToComponentsTab() {
-  //   return Padding(
-  //     padding: const EdgeInsets.all(16.0),
-  //     child: Column(
-  //       children: [
-  //         TextField(
-  //           controller: _inputController,
-  //           decoration: InputDecoration(
-  //             hintText: "Describe your project idea...",
-  //             border: const OutlineInputBorder(),
-  //             suffixIcon: IconButton(
-  //               icon: const Icon(Icons.send, color: Colors.blue),
-  //               onPressed: _fetchAIResponse,
-  //             ),
-  //           ),
-  //         ),
-  //         const SizedBox(height: 16),
-  //         Expanded(
-  //           child: aiResponse == null
-  //               ? const Center(
-  //                   child: Text("Enter a query to get AI suggestions"))
-  //               : Card(
-  //                   elevation: 3,
-  //                   child: Padding(
-  //                     padding: const EdgeInsets.all(16.0),
-  //                     child: Text(
-  //                       aiResponse!,
-  //                       style: const TextStyle(fontSize: 16),
-  //                     ),
-  //                   ),
-  //                 ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
+class IdeaToComponentsScreen extends StatelessWidget {
+  const IdeaToComponentsScreen({super.key});
 
-  // Widget _buildComponentsToProjectsTab() {
-  //   return Padding(
-  //     padding: const EdgeInsets.all(16.0),
-  //     child: Column(
-  //       children: [
-  //         TextField(
-  //           controller: _inputController,
-  //           decoration: InputDecoration(
-  //             hintText: "List your available components...",
-  //             border: const OutlineInputBorder(),
-  //             suffixIcon: IconButton(
-  //               icon: const Icon(Icons.send, color: Colors.blue),
-  //               onPressed: _fetchAIResponse,
-  //             ),
-  //           ),
-  //         ),
-  //         const SizedBox(height: 16),
-  //         Expanded(
-  //           child: aiResponse == null
-  //               ? const Center(
-  //                   child: Text("Enter a query to get AI suggestions"))
-  //               : Card(
-  //                   elevation: 3,
-  //                   child: Padding(
-  //                     padding: const EdgeInsets.all(16.0),
-  //                     child: Text(
-  //                       aiResponse!,
-  //                       style: const TextStyle(fontSize: 16),
-  //                     ),
-  //                   ),
-  //                 ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        decoration: const BoxDecoration(color: Colors.red),
+        child: const Center(
+          child: Text(
+            'This is the Idea to Components Screen',
+            style: TextStyle(fontSize: 18, color: Colors.white),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ComponentsToProjectsScreen extends StatelessWidget {
+  const ComponentsToProjectsScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        decoration: const BoxDecoration(color: Colors.green),
+        child: const Center(
+          child: Text(
+            'This is the Components to Projects Screen',
+            style: TextStyle(fontSize: 18, color: Colors.white),
+          ),
+        ),
+      ),
+    );
+  }
 }
