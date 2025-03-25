@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:store/Core/Utils/app_styles.dart';
 import 'package:store/Featuers/Nav_Bar_Pages/Presentation/Views/Widget/search/search_view.dart';
 
+// ignore: must_be_immutable
 class CategoreHomeWidget extends StatelessWidget {
   CategoreHomeWidget({
     super.key,

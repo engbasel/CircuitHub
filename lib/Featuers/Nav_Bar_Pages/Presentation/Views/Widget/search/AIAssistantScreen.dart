@@ -3,10 +3,10 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 
 class AIAssistantEngginering extends StatefulWidget {
   const AIAssistantEngginering({super.key});
+  static const routeName = 'AIAssistantScreen';
 
   @override
   State<AIAssistantEngginering> createState() => _AIAssistantEnggineringState();
-  static const routeName = 'AIAssistantScreen';
 }
 
 class _AIAssistantEnggineringState extends State<AIAssistantEngginering>
@@ -50,42 +50,101 @@ class _AIAssistantEnggineringState extends State<AIAssistantEngginering>
           ],
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            TextField(
-              controller: _inputController,
-              decoration: InputDecoration(
-                hintText: _tabController.index == 0
-                    ? "Describe your project idea..."
-                    : "List your available components...",
-                border: const OutlineInputBorder(),
-                suffixIcon: IconButton(
-                  icon: const Icon(Icons.send, color: Colors.blue),
-                  onPressed: _fetchAIResponse,
-                ),
-              ),
+      body: TabBarView(
+        controller: _tabController,
+        children: [
+          Container(
+            decoration: const BoxDecoration(
+              color: Colors.red,
             ),
-            const SizedBox(height: 16),
-            Expanded(
-              child: aiResponse == null
-                  ? const Center(
-                      child: Text("Enter a query to get AI suggestions"))
-                  : Card(
-                      elevation: 3,
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Text(
-                          aiResponse!,
-                          style: const TextStyle(fontSize: 16),
-                        ),
-                      ),
-                    ),
+            child: const Text(
+              '11111111111111',
             ),
-          ],
-        ),
+          ),
+          Container(
+            decoration: const BoxDecoration(
+              color: Colors.green,
+            ),
+            child: const Text(
+              '22222222222222',
+            ),
+          ),
+        ],
       ),
     );
   }
+
+  // Widget _buildIdeaToComponentsTab() {
+  //   return Padding(
+  //     padding: const EdgeInsets.all(16.0),
+  //     child: Column(
+  //       children: [
+  //         TextField(
+  //           controller: _inputController,
+  //           decoration: InputDecoration(
+  //             hintText: "Describe your project idea...",
+  //             border: const OutlineInputBorder(),
+  //             suffixIcon: IconButton(
+  //               icon: const Icon(Icons.send, color: Colors.blue),
+  //               onPressed: _fetchAIResponse,
+  //             ),
+  //           ),
+  //         ),
+  //         const SizedBox(height: 16),
+  //         Expanded(
+  //           child: aiResponse == null
+  //               ? const Center(
+  //                   child: Text("Enter a query to get AI suggestions"))
+  //               : Card(
+  //                   elevation: 3,
+  //                   child: Padding(
+  //                     padding: const EdgeInsets.all(16.0),
+  //                     child: Text(
+  //                       aiResponse!,
+  //                       style: const TextStyle(fontSize: 16),
+  //                     ),
+  //                   ),
+  //                 ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
+
+  // Widget _buildComponentsToProjectsTab() {
+  //   return Padding(
+  //     padding: const EdgeInsets.all(16.0),
+  //     child: Column(
+  //       children: [
+  //         TextField(
+  //           controller: _inputController,
+  //           decoration: InputDecoration(
+  //             hintText: "List your available components...",
+  //             border: const OutlineInputBorder(),
+  //             suffixIcon: IconButton(
+  //               icon: const Icon(Icons.send, color: Colors.blue),
+  //               onPressed: _fetchAIResponse,
+  //             ),
+  //           ),
+  //         ),
+  //         const SizedBox(height: 16),
+  //         Expanded(
+  //           child: aiResponse == null
+  //               ? const Center(
+  //                   child: Text("Enter a query to get AI suggestions"))
+  //               : Card(
+  //                   elevation: 3,
+  //                   child: Padding(
+  //                     padding: const EdgeInsets.all(16.0),
+  //                     child: Text(
+  //                       aiResponse!,
+  //                       style: const TextStyle(fontSize: 16),
+  //                     ),
+  //                   ),
+  //                 ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 }
