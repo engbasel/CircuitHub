@@ -7,7 +7,7 @@ AppBar buildAppBar(BuildContext context, VoidCallback onNewChat) {
   return AppBar(
     backgroundColor: AppColors.darkPrimary,
     title: const Text(
-      "Chat Bot",
+      " Engineer AI Assistant",
       style: TextStyle(
         color: Colors.white,
         fontSize: 20,
@@ -16,7 +16,6 @@ AppBar buildAppBar(BuildContext context, VoidCallback onNewChat) {
     ),
     centerTitle: true,
     elevation: 4,
-    shadowColor: Colors.white,
     leading: Padding(
       padding: const EdgeInsets.all(8.0),
       child: CircleAvatar(
@@ -33,7 +32,7 @@ AppBar buildAppBar(BuildContext context, VoidCallback onNewChat) {
     ],
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(
-        bottom: Radius.circular(20),
+        bottom: Radius.circular(1),
       ),
     ),
   );
