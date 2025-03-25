@@ -10,14 +10,6 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-      //     Navigator.pushNamed(context, 'ChatBotViewBody');
-      //   },
-      //   backgroundColor: Colors.blue,
-      //   child: const Icon(Icons.shopping_cart),
-      // ),
       appBar: AppBar(
         title: const AppNameAnimatedText(
           text: 'CircuitHub',

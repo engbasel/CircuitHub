@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:store/Featuers/Nav_Bar_Pages/Presentation/Views/Widget/search/AI_assestnat_chat.dart';
+import 'package:store/Featuers/Nav_Bar_Pages/Presentation/Views/Widget/search/AIAssistantScreen.dart';
 
 class HelpingWidget extends StatelessWidget {
   const HelpingWidget({super.key});
@@ -75,7 +75,8 @@ class HelpingWidget extends StatelessWidget {
             onPressed: () {
               Navigator.pushNamed(
                 context,
-                AIAssistant.routeName,
+                // AIAssistant.routeName,
+                AIAssistantScreen.routeName,
               ); // Replace with your actual route
             },
             style: ElevatedButton.styleFrom(
