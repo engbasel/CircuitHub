@@ -1,11 +1,12 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
-import 'package:store/Core/Utils/app_colors.dart';
 
 AppBar buildAppBar(BuildContext context, VoidCallback onNewChat) {
+  bool isDarkTheme = Theme.of(context).brightness == Brightness.dark;
   return AppBar(
-    backgroundColor: AppColors.darkPrimary,
+    elevation: 0,
+    backgroundColor: isDarkTheme ? Colors.black : Colors.white,
     title: const Text(
       " Engineer AI Assistant",
       style: TextStyle(
@@ -15,7 +16,6 @@ AppBar buildAppBar(BuildContext context, VoidCallback onNewChat) {
       ),
     ),
     centerTitle: true,
-    elevation: 4,
     leading: Padding(
       padding: const EdgeInsets.all(8.0),
       child: CircleAvatar(

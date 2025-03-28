@@ -34,7 +34,7 @@ class _AIAssistantEnggineringState extends State<AIAssistantEngginering>
       appBar: buildAppBar(context, () {}),
       body: Column(
         children: [
-          buildTabBar(_tabController),
+          buildTabBar(_tabController, context),
           Expanded(
             child: TabBarView(
               controller: _tabController,
