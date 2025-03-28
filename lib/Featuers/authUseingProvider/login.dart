@@ -1,10 +1,6 @@
-import 'dart:developer';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:store/Core/Helper_Functions/failuer_top_snak_bar.dart';
-import 'package:store/Core/Helper_Functions/scccess_top_snak_bar.dart';
+
 import 'package:store/Core/Utils/app_name_animated_text.dart';
 import 'package:store/Core/Utils/app_styles.dart';
 import 'package:store/Core/Utils/assets.dart';
@@ -12,11 +8,10 @@ import 'package:store/Core/Utils/loading_manager.dart';
 import 'package:store/Core/Widget/custom_botton.dart';
 import 'package:store/Core/Widget/custom_text_field.dart';
 
-import 'package:store/Core/errors/exceptions.dart';
-import 'package:store/Featuers/authUseingProvider/BlockedScreen.dart';
 import 'package:store/Featuers/authUseingProvider/dont_have_an_account_widget.dart';
 import 'package:store/Featuers/authUseingProvider/forgot_password_view.dart';
 import 'package:store/Featuers/authUseingProvider/google_btn.dart';
+import 'package:store/Featuers/authUseingProvider/login_handeler.dart';
 import 'package:store/Featuers/authUseingProvider/or_divider.dart';
 import 'package:store/Featuers/authUseingProvider/password_field.dart';
 import 'package:store/Featuers/authUseingProvider/social_login_button.dart';
@@ -52,6 +47,23 @@ class _LoginVeiwState extends State<LoginVeiw> {
     super.initState();
   }
 
+  void toggleLoading() {
+    setState(() {
+      isLoading = !isLoading;
+    });
+  }
+
+  final LoginHandler loginHandler = LoginHandler(); // Instance of LoginHandler
+
+  void login() async {
+    await loginHandler.loginFct(
+      email: _emailController.text.trim(),
+      password: _passwordController.text.trim(),
+      context: context,
+      setLoading: toggleLoading, // ✅ Pass the function reference correctly
+    );
+  }
+
   @override
   void dispose() {
     _emailController.dispose();
@@ -60,90 +72,6 @@ class _LoginVeiwState extends State<LoginVeiw> {
     _emailFocusNode.dispose();
     _passwordFocusNode.dispose();
     super.dispose();
-  }
-
-  Future<User?> loginFct({
-    required String email,
-    required String password,
-    required BuildContext context,
-  }) async {
-    setState(() {
-      isLoading = true;
-    });
-
-    try {
-      // Sign in with Firebase Authentication
-      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-
-      final user = credential.user;
-      if (user == null) throw FirebaseAuthException(code: 'user-not-found');
-
-      // Fetch user data from Firestore
-      final userDoc = await FirebaseFirestore.instance
-          .collection('users') // Ensure this is the correct collection name
-          .doc(user.uid)
-          .get();
-
-      if (!userDoc.exists) {
-        throw FirebaseAuthException(code: 'user-not-found');
-      }
-
-      final userData = userDoc.data();
-      final String userStatus = userData?['userStatus'] ?? '';
-
-      if (userStatus == 'USERALLOWED') {
-        // ignore: use_build_context_synchronously
-        succesTopSnackBar(context, 'Login Successful');
-        // ignore: use_build_context_synchronously
-        Navigator.pushReplacementNamed(context, CustomBottomNavBar.routeName);
-      } else if (userStatus == 'USERBLOCKED') {
-        // ignore: use_build_context_synchronously
-        failuerTopSnackBar(context, 'Your account is blocked.');
-        // ignore: use_build_context_synchronously
-        Navigator.pushReplacementNamed(context, BlockedScreen.routeName);
-      } else {
-        // ignore: use_build_context_synchronously
-        failuerTopSnackBar(context, 'Unknown status. Please contact support.');
-      }
-
-      return user;
-    } on FirebaseAuthException catch (e) {
-      log('FirebaseAuthException in _loginFct: ${e.code}');
-      String errorMessage = '';
-
-      switch (e.code) {
-        case 'user-not-found':
-          errorMessage = 'No user found for this email.';
-          break;
-        case 'wrong-password':
-          errorMessage = 'Incorrect password. Please try again.';
-          break;
-        case 'network-request-failed':
-          errorMessage = 'Please check your internet connection.';
-          break;
-        default:
-          errorMessage = 'An error occurred. Please try again later.';
-      }
-
-      // ignore: use_build_context_synchronously
-      failuerTopSnackBar(context, errorMessage);
-      throw CustomExceptions(message: errorMessage);
-    } catch (e) {
-      log('Exception in _loginFct: ${e.toString()}');
-      failuerTopSnackBar(
-          // ignore: use_build_context_synchronously
-          context,
-          'An unexpected error occurred. Please try again later.');
-      throw CustomExceptions(
-          message: 'An unexpected error occurred. Please try again later.');
-    } finally {
-      setState(() {
-        isLoading = false;
-      });
-    }
   }
 
   @override
@@ -237,12 +165,8 @@ class _LoginVeiwState extends State<LoginVeiw> {
                           validator: (value) {
                             return MyValidators.passwordValidator(value);
                           },
-                          onFieldSubmitted: (value) async {
-                            await loginFct(
-                              context: context,
-                              email: _emailController.text,
-                              password: _passwordController.text,
-                            );
+                          onFieldSubmitted: (p0) {
+                            login();
                           },
                         ),
                         const SizedBox(
@@ -272,13 +196,7 @@ class _LoginVeiwState extends State<LoginVeiw> {
                           background: isDarkMode ? Colors.white : Colors.black,
                           // Get theme-appropriate text color
                           TextColor: isDarkMode ? Colors.black : Colors.white,
-                          onPressed: () async {
-                            await loginFct(
-                              context: context,
-                              email: _emailController.text,
-                              password: _passwordController.text,
-                            );
-                          },
+                          onPressed: login,
                           text: 'Sign In',
                         ),
                         const SizedBox(
