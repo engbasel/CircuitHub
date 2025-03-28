@@ -20,7 +20,7 @@ import 'package:store/constans.dart';
 import 'package:store/Core/Widget/custom_bottom_nav_bar.dart';
 
 class RegisterScreen extends StatefulWidget {
-  static const routeName = '/RegisterScreen';
+  static const routeName = 'RegisterScreen';
   const RegisterScreen({super.key});
 
   @override
@@ -108,6 +108,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           'userEmail': _emailController.text.toLowerCase(),
           'createdAt': Timestamp.now(),
           'userWish': [],
+          'userStatus': 'USERALLOWED',
           'userCart': [],
         });
         Fluttertoast.showToast(

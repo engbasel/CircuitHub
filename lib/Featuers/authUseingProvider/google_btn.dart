@@ -65,6 +65,7 @@ class _GoogleButtonState extends State<GoogleButton> {
             'userId': user.uid,
             'userName': user.displayName,
             'userImage': user.photoURL,
+            'userStatus': 'USERALLOWED',
             'userEmail': user.email,
             'createdAt': Timestamp.now(),
             'userWish': [],

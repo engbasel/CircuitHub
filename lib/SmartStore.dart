@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 
+import 'package:store/Featuers/splash/presentation/views/splashview.dart';
 import 'package:store/app_router.dart';
 import 'package:store/providers/cart_provider.dart';
 import 'package:store/providers/order_provider.dart';
@@ -57,6 +58,7 @@ class SmartStore extends StatelessWidget {
           // home: const SplashView(),
           home: const CustomBottomNavBar(),
           onGenerateRoute: AppRouter.generateRoute, // Use onGenerateRoute
+          initialRoute: SplashView.routeName,
         );
       }),
     );

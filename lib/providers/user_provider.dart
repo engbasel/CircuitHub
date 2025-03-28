@@ -9,6 +9,28 @@ class UserProvider with ChangeNotifier {
     return userModel;
   }
 
+  Future<void> createUser(String userId, String userName, String userEmail,
+      String userStatus, String userImage) async {
+    try {
+      final userDoc =
+          FirebaseFirestore.instance.collection("users").doc(userId);
+      await userDoc.set({
+        'userId': userId,
+        'userName': userName,
+        'userEmail': userEmail,
+        'userImage': userImage,
+        'userStatus': userStatus, // Initial user status
+        'userCart': [],
+        'userWish': [],
+        'createdAt': FieldValue.serverTimestamp(),
+      });
+    } on FirebaseException catch (error) {
+      throw error.message.toString();
+    } catch (error) {
+      rethrow;
+    }
+  }
+
   Future<UserModelProvider?> fetchUserInfo() async {
     final FirebaseAuth auth = FirebaseAuth.instance;
     User? user = auth.currentUser;
@@ -20,17 +42,7 @@ class UserProvider with ChangeNotifier {
       final userDoc =
           await FirebaseFirestore.instance.collection("users").doc(uid).get();
       final userDocDict = userDoc.data();
-      userModel = UserModelProvider(
-        userId: userDoc.get("userId"),
-        userName: userDoc.get("userName"),
-        userImage: userDoc.get("userImage"),
-        userEmail: userDoc.get('userEmail'),
-        userCart:
-            userDocDict!.containsKey("userCart") ? userDoc.get("userCart") : [],
-        userWish:
-            userDocDict.containsKey("userWish") ? userDoc.get("userWish") : [],
-        createdAt: userDoc.get('createdAt'),
-      );
+      userModel = UserModelProvider.fromMap(userDocDict!);
       return userModel;
     } on FirebaseException catch (error) {
       throw error.message.toString();
