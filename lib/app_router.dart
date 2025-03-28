@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:store/Featuers/authUseingProvider/BlockedScreen.dart';
 import 'package:store/core/widget/custom_bottom_nav_bar.dart';
 import 'package:store/featuers/authUseingProvider/forgot_password.dart';
 import 'package:store/featuers/authUseingProvider/forgot_password_view.dart';
@@ -35,6 +36,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const ForgotPasswordScreen());
       case LoginVeiw.routeName:
         return MaterialPageRoute(builder: (_) => const LoginVeiw());
+      case BlockedScreen.routeName:
+        return MaterialPageRoute(builder: (_) => const BlockedScreen());
       case RegisterScreen.routeName:
         return MaterialPageRoute(builder: (_) => const RegisterScreen());
       case SplashView.routeName:

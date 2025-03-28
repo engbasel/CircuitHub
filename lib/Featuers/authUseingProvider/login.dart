@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:store/Core/Helper_Functions/failuer_top_snak_bar.dart';
@@ -12,6 +13,7 @@ import 'package:store/Core/Widget/custom_botton.dart';
 import 'package:store/Core/Widget/custom_text_field.dart';
 
 import 'package:store/Core/errors/exceptions.dart';
+import 'package:store/Featuers/authUseingProvider/BlockedScreen.dart';
 import 'package:store/Featuers/authUseingProvider/dont_have_an_account_widget.dart';
 import 'package:store/Featuers/authUseingProvider/forgot_password_view.dart';
 import 'package:store/Featuers/authUseingProvider/google_btn.dart';
@@ -60,32 +62,56 @@ class _LoginVeiwState extends State<LoginVeiw> {
     super.dispose();
   }
 
-  // Sign in with Email and Password
-  Future<User?> loginFct(
-      {required String email, required String password}) async {
+  Future<User?> loginFct({
+    required String email,
+    required String password,
+    required BuildContext context,
+  }) async {
     setState(() {
       isLoading = true;
     });
 
     try {
+      // Sign in with Firebase Authentication
       final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
 
-      if (!mounted) return credential.user;
+      final user = credential.user;
+      if (user == null) throw FirebaseAuthException(code: 'user-not-found');
 
-      succesTopSnackBar(
-        context,
-        'Login Successful',
-      );
+      // Fetch user data from Firestore
+      final userDoc = await FirebaseFirestore.instance
+          .collection('users') // Ensure this is the correct collection name
+          .doc(user.uid)
+          .get();
 
-      Navigator.pushReplacementNamed(context, CustomBottomNavBar.routeName);
+      if (!userDoc.exists) {
+        throw FirebaseAuthException(code: 'user-not-found');
+      }
 
-      return credential.user;
+      final userData = userDoc.data();
+      final String userStatus = userData?['userStatus'] ?? '';
+
+      if (userStatus == 'USERALLOWED') {
+        // ignore: use_build_context_synchronously
+        succesTopSnackBar(context, 'Login Successful');
+        // ignore: use_build_context_synchronously
+        Navigator.pushReplacementNamed(context, CustomBottomNavBar.routeName);
+      } else if (userStatus == 'USERBLOCKED') {
+        // ignore: use_build_context_synchronously
+        failuerTopSnackBar(context, 'Your account is blocked.');
+        // ignore: use_build_context_synchronously
+        Navigator.pushReplacementNamed(context, BlockedScreen.routeName);
+      } else {
+        // ignore: use_build_context_synchronously
+        failuerTopSnackBar(context, 'Unknown status. Please contact support.');
+      }
+
+      return user;
     } on FirebaseAuthException catch (e) {
       log('FirebaseAuthException in _loginFct: ${e.code}');
-
       String errorMessage = '';
 
       switch (e.code) {
@@ -102,17 +128,15 @@ class _LoginVeiwState extends State<LoginVeiw> {
           errorMessage = 'An error occurred. Please try again later.';
       }
 
-      // Show top snackbar with error message
+      // ignore: use_build_context_synchronously
       failuerTopSnackBar(context, errorMessage);
-
       throw CustomExceptions(message: errorMessage);
     } catch (e) {
       log('Exception in _loginFct: ${e.toString()}');
-
-      // If the error is unrelated to FirebaseAuth, like network issues, show a generic error message
       failuerTopSnackBar(
-          context, 'An unexpected error occurred. Please try again later.');
-
+          // ignore: use_build_context_synchronously
+          context,
+          'An unexpected error occurred. Please try again later.');
       throw CustomExceptions(
           message: 'An unexpected error occurred. Please try again later.');
     } finally {
@@ -215,6 +239,7 @@ class _LoginVeiwState extends State<LoginVeiw> {
                           },
                           onFieldSubmitted: (value) async {
                             await loginFct(
+                              context: context,
                               email: _emailController.text,
                               password: _passwordController.text,
                             );
@@ -249,6 +274,7 @@ class _LoginVeiwState extends State<LoginVeiw> {
                           TextColor: isDarkMode ? Colors.black : Colors.white,
                           onPressed: () async {
                             await loginFct(
+                              context: context,
                               email: _emailController.text,
                               password: _passwordController.text,
                             );
