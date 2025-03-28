@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
-import 'package:store/Core/Utils/app_colors.dart';
 
 Widget buildTabBar(TabController? controller, BuildContext context) {
   bool isDarkTheme = Theme.of(context).brightness == Brightness.dark;
