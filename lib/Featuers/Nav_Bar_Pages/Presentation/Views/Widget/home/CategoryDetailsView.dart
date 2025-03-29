@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:provider/provider.dart';
+import 'package:store/Core/Utils/app_name_animated_text.dart';
 import 'package:store/Core/Utils/app_styles.dart';
+import 'package:store/Core/Utils/assets.dart';
+import 'package:store/providers/cart_provider.dart';
+import 'package:store/providers/wishlist_provider.dart';
 
 class CategoryDetailsView extends StatelessWidget {
   final String categoryName;
@@ -17,12 +22,19 @@ class CategoryDetailsView extends StatelessWidget {
     int crossAxisCount = size.width > 600 ? 3 : 2;
     double childAspectRatio = size.width > 600 ? 0.75 : 0.85;
 
+    final cartProvider = Provider.of<CartProvider>(context);
+    final wishlistProvider = Provider.of<WishlistProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(categoryName,
-            style:
-                AppStyles.styleMedium16.copyWith(fontSize: size.width * 0.045)),
-        centerTitle: true,
+        title: AppNameAnimatedText(
+          text: categoryName,
+          fontSize: 20,
+        ),
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 10),
+          child: Image.asset(Assets.admin_imagesShoppingCart),
+        ),
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(
@@ -61,9 +73,11 @@ class CategoryDetailsView extends StatelessWidget {
               itemCount: products.length,
               itemBuilder: (context, index) {
                 var product = products[index].data() as Map<String, dynamic>;
+                String productId = products[index].id;
+
                 return Card(
                   shadowColor: Colors.white,
-                  color: Colors.white, // Set the background color to white
+                  color: Colors.white,
                   elevation: 5,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12)),
@@ -103,6 +117,55 @@ class CategoryDetailsView extends StatelessWidget {
                               "Quantity: ${product['productQuantity']}",
                               style: AppStyles.styleMedium14
                                   .copyWith(color: Colors.grey),
+                            ),
+                            const SizedBox(height: 8),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                /// **Wishlist Button (حب)**
+                                IconButton(
+                                  onPressed: () {
+                                    wishlistProvider.addOrRemoveFromWishlist(
+                                        productId: productId);
+                                  },
+                                  icon: Icon(
+                                    wishlistProvider.isProductInWishlist(
+                                            productId: productId)
+                                        ? Icons.favorite
+                                        : Icons.favorite_border,
+                                    size: 24,
+                                    color: wishlistProvider.isProductInWishlist(
+                                            productId: productId)
+                                        ? Colors.red
+                                        : Colors.grey,
+                                  ),
+                                ),
+
+                                /// **Cart Button (سلة التسوق)**
+                                IconButton(
+                                  onPressed: () {
+                                    if (!cartProvider.isProductInCart(
+                                        productId: productId)) {
+                                      cartProvider.addToCartFirebase(
+                                        productId: productId,
+                                        qty: 1,
+                                        context: context,
+                                      );
+                                    }
+                                  },
+                                  icon: Icon(
+                                    cartProvider.isProductInCart(
+                                            productId: productId)
+                                        ? Icons.check
+                                        : Icons.add_shopping_cart_outlined,
+                                    size: 24,
+                                    color: cartProvider.isProductInCart(
+                                            productId: productId)
+                                        ? Colors.green
+                                        : Colors.blue,
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
