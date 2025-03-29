@@ -4,8 +4,11 @@ import 'package:provider/provider.dart';
 import 'package:store/Core/Utils/app_name_animated_text.dart';
 import 'package:store/Core/Utils/app_styles.dart';
 import 'package:store/Core/Utils/assets.dart';
+import 'package:store/Featuers/Nav_Bar_Pages/Presentation/Views/Widget/inner_widget/product_details.dart';
 import 'package:store/providers/cart_provider.dart';
+
 import 'package:store/providers/wishlist_provider.dart';
+import 'package:store/Core/Utils/app_colors.dart';
 
 class CategoryDetailsView extends StatelessWidget {
   final String categoryName;
@@ -75,107 +78,158 @@ class CategoryDetailsView extends StatelessWidget {
                 var product = products[index].data() as Map<String, dynamic>;
                 String productId = products[index].id;
 
-                return Card(
-                  shadowColor: Colors.white,
-                  color: Colors.white,
-                  elevation: 5,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12)),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                return CatigoryWidgetCardDeaitels(
+                    product: product,
+                    wishlistProvider: wishlistProvider,
+                    productId: productId,
+                    cartProvider: cartProvider);
+              },
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class CatigoryWidgetCardDeaitels extends StatefulWidget {
+  const CatigoryWidgetCardDeaitels({
+    super.key,
+    required this.product,
+    required this.wishlistProvider,
+    required this.productId,
+    required this.cartProvider,
+  });
+
+  final Map<String, dynamic> product;
+  final WishlistProvider wishlistProvider;
+  final String productId;
+  final CartProvider cartProvider;
+
+  @override
+  State<CatigoryWidgetCardDeaitels> createState() =>
+      _CatigoryWidgetCardDeaitelsState();
+}
+
+class _CatigoryWidgetCardDeaitelsState
+    extends State<CatigoryWidgetCardDeaitels> {
+  @override
+  Widget build(BuildContext context) {
+    bool isDarkTheme = Theme.of(context).brightness == Brightness.dark;
+
+    return GestureDetector(
+      onTap: () {
+        if (widget.productId.isNotEmpty) {
+          Navigator.pushNamed(
+            context,
+            ProductDetails.routeName,
+            arguments: widget.productId,
+          );
+        } else {
+          debugPrint("Error: productId is null or empty!");
+        }
+      },
+      child: Card(
+        shadowColor: isDarkTheme ? Colors.black54 : Colors.white,
+        color: isDarkTheme
+            ? AppColors.darkScaffoldColor
+            : AppColors.lightScaffoldColor,
+        elevation: 5,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              flex: 3, // زيادة حجم الصورة داخل البطاقة
+              child: ClipRRect(
+                borderRadius:
+                    const BorderRadius.vertical(top: Radius.circular(12)),
+                child: Image.network(
+                  widget.product['productImage'],
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    widget.product['productTitle'],
+                    style: AppStyles.styleMedium16.copyWith(
+                      color: isDarkTheme ? Colors.white : Colors.black,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    "\$${widget.product['productPrice']}",
+                    style: AppStyles.styleBold16.copyWith(
+                      color: Colors.redAccent,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    "Quantity: ${widget.product['productQuantity']}",
+                    style: AppStyles.styleMedium14.copyWith(
+                      color: isDarkTheme ? Colors.grey[300] : Colors.grey,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Expanded(
-                        child: ClipRRect(
-                          borderRadius: const BorderRadius.vertical(
-                              top: Radius.circular(12)),
-                          child: Image.network(
-                            product['productImage'],
-                            width: double.infinity,
-                            fit: BoxFit.cover,
-                          ),
+                      IconButton(
+                        onPressed: () {
+                          widget.wishlistProvider.addOrRemoveFromWishlist(
+                              productId: widget.productId);
+                        },
+                        icon: Icon(
+                          widget.wishlistProvider.isProductInWishlist(
+                                  productId: widget.productId)
+                              ? Icons.favorite
+                              : Icons.favorite_border,
+                          size: 24,
+                          color: widget.wishlistProvider.isProductInWishlist(
+                                  productId: widget.productId)
+                              ? Colors.red
+                              : (isDarkTheme ? Colors.white : Colors.grey),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              product['productTitle'],
-                              style: AppStyles.styleMedium16,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              "\$${product['productPrice']}",
-                              style: AppStyles.styleBold16
-                                  .copyWith(color: Colors.redAccent),
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              "Quantity: ${product['productQuantity']}",
-                              style: AppStyles.styleMedium14
-                                  .copyWith(color: Colors.grey),
-                            ),
-                            const SizedBox(height: 8),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                /// **Wishlist Button (حب)**
-                                IconButton(
-                                  onPressed: () {
-                                    wishlistProvider.addOrRemoveFromWishlist(
-                                        productId: productId);
-                                  },
-                                  icon: Icon(
-                                    wishlistProvider.isProductInWishlist(
-                                            productId: productId)
-                                        ? Icons.favorite
-                                        : Icons.favorite_border,
-                                    size: 24,
-                                    color: wishlistProvider.isProductInWishlist(
-                                            productId: productId)
-                                        ? Colors.red
-                                        : Colors.grey,
-                                  ),
-                                ),
-
-                                /// **Cart Button (سلة التسوق)**
-                                IconButton(
-                                  onPressed: () {
-                                    if (!cartProvider.isProductInCart(
-                                        productId: productId)) {
-                                      cartProvider.addToCartFirebase(
-                                        productId: productId,
-                                        qty: 1,
-                                        context: context,
-                                      );
-                                    }
-                                  },
-                                  icon: Icon(
-                                    cartProvider.isProductInCart(
-                                            productId: productId)
-                                        ? Icons.check
-                                        : Icons.add_shopping_cart_outlined,
-                                    size: 24,
-                                    color: cartProvider.isProductInCart(
-                                            productId: productId)
-                                        ? Colors.green
-                                        : Colors.blue,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
+                      IconButton(
+                        onPressed: () {
+                          if (!widget.cartProvider
+                              .isProductInCart(productId: widget.productId)) {
+                            widget.cartProvider.addToCartFirebase(
+                              productId: widget.productId,
+                              qty: 1,
+                              context: context,
+                            );
+                          }
+                        },
+                        icon: Icon(
+                          widget.cartProvider
+                                  .isProductInCart(productId: widget.productId)
+                              ? Icons.check
+                              : Icons.add_shopping_cart_outlined,
+                          size: 24,
+                          color: widget.cartProvider
+                                  .isProductInCart(productId: widget.productId)
+                              ? Colors.green
+                              : (isDarkTheme
+                                  ? AppColors.darkPrimary
+                                  : AppColors.lightPrimary),
                         ),
                       ),
                     ],
                   ),
-                );
-              },
-            );
-          },
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );

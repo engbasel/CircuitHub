@@ -15,43 +15,34 @@ class ProductDetails extends StatefulWidget {
 
 class _ProductDetailsState extends State<ProductDetails> {
   @override
+  @override
+  @override
   Widget build(BuildContext context) {
     final productProvider =
         Provider.of<ProductProvider>(context, listen: false);
-    final productId = ModalRoute.of(context)?.settings.arguments as String;
+    final productId = ModalRoute.of(context)?.settings.arguments as String?;
+
+    if (productId == null || productId.isEmpty) {
+      debugPrint("Error: No productId received in ProductDetails!");
+      return Scaffold(
+        appBar: AppBar(title: const Text("Error")),
+        body: const Center(child: Text("Product not found!")),
+      );
+    }
+
     final getCurrProduct = productProvider.findByProdId(productId);
 
-    return getCurrProduct == null
-        ? const SizedBox.shrink()
-        : Scaffold(
-            appBar: AppBar(
-              centerTitle: true,
-              title: const AppNameAnimatedText(
-                text: 'CircuitHub',
-                fontSize: 24,
-              ),
-              leading: IconButton(
-                onPressed: () {
-                  Navigator.canPop(context) ? Navigator.pop(context) : null;
-                },
-                icon: const Icon(
-                  IconlyLight.arrowLeft2,
-                ),
-              ),
-              actions: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    IconlyLight.bag2,
-                  ),
-                ),
-              ],
-            ),
-            body: ProductDetailsBody(
-              productProvider: productProvider,
-              getCurrProduct: getCurrProduct,
-              productId: productId,
-            ),
-          );
+    if (getCurrProduct == null) {
+      debugPrint("Error: No product found with ID: $productId");
+      return Scaffold(
+        appBar: AppBar(title: const Text("Error")),
+        body: Center(child: Text("Product with ID $productId not found!")),
+      );
+    }
+
+    return Scaffold(
+      appBar: AppBar(title: Text(getCurrProduct.productTitle)),
+      body: const Center(child: Text("Product details here...")),
+    );
   }
 }
