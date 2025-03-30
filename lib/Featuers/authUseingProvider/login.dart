@@ -233,8 +233,6 @@ class _LoginVeiwState extends State<LoginVeiw> {
                       ],
                     ),
                   ),
-                  TextButton(
-                      onPressed: fetchProjects, child: const Text('testAi'))
                 ],
               ),
             ),
