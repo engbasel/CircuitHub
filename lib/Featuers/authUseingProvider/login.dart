@@ -17,6 +17,7 @@ import 'package:store/Featuers/authUseingProvider/password_field.dart';
 import 'package:store/Featuers/authUseingProvider/social_login_button.dart';
 import 'package:store/constans.dart';
 import 'package:store/Core/Widget/custom_bottom_nav_bar.dart';
+import 'package:store/services/DioServiceHelper.dart';
 
 class LoginVeiw extends StatefulWidget {
   static const routeName = 'LoginVeiw';
@@ -51,6 +52,17 @@ class _LoginVeiwState extends State<LoginVeiw> {
     setState(() {
       isLoading = !isLoading;
     });
+  }
+
+  void fetchProjects() async {
+    ApiService apiService = ApiService();
+
+    Map<String, dynamic> result = await apiService.searchProject(
+      projectDescription: "voice control car",
+      // requiredComponents: ["arduino", "relay module", "temperature sensor"],
+    );
+
+    print(result); // Print response data
   }
 
   final LoginHandler loginHandler = LoginHandler(); // Instance of LoginHandler
@@ -225,6 +237,8 @@ class _LoginVeiwState extends State<LoginVeiw> {
                       ],
                     ),
                   ),
+                  TextButton(
+                      onPressed: fetchProjects, child: const Text('testAi'))
                 ],
               ),
             ),
