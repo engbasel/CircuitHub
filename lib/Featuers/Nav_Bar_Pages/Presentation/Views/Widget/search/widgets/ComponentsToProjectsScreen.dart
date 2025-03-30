@@ -1,65 +1,5 @@
-// import 'package:flutter/material.dart';
-
-// class ComponentsToProjectsScreen extends StatefulWidget {
-//   const ComponentsToProjectsScreen({super.key});
-
-//   @override
-//   State<ComponentsToProjectsScreen> createState() =>
-//       _ComponentsToProjectsScreenState();
-// }
-
-// class _ComponentsToProjectsScreenState
-//     extends State<ComponentsToProjectsScreen> {
-//   final TextEditingController _componentsController = TextEditingController();
-//   String? aiResponse;
-
-//   void _fetchAIResponse() {
-//     setState(() {
-//       aiResponse = "AI is processing your request...";
-//     });
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: const EdgeInsets.all(16.0),
-//       child: Column(
-//         children: [
-//           TextField(
-//             controller: _componentsController,
-//             decoration: InputDecoration(
-//               hintText: "List your available components...",
-//               border: const OutlineInputBorder(),
-//               suffixIcon: IconButton(
-//                 icon: const Icon(Icons.send, color: Colors.blue),
-//                 onPressed: _fetchAIResponse,
-//               ),
-//             ),
-//           ),
-//           const SizedBox(height: 16),
-//           Expanded(
-//             child: aiResponse == null
-//                 ? const Center(
-//                     child:
-//                         Text("Enter components to get AI project suggestions"))
-//                 : Card(
-//                     elevation: 3,
-//                     child: Padding(
-//                       padding: const EdgeInsets.all(16.0),
-//                       child: Text(
-//                         aiResponse!,
-//                         style: const TextStyle(fontSize: 16),
-//                       ),
-//                     ),
-//                   ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
 import 'package:flutter/material.dart';
+import 'package:store/services/DioServiceHelper.dart';
 
 class ComponentsToProjectsScreen extends StatefulWidget {
   const ComponentsToProjectsScreen({super.key});
@@ -72,69 +12,120 @@ class ComponentsToProjectsScreen extends StatefulWidget {
 class _ComponentsToProjectsScreenState
     extends State<ComponentsToProjectsScreen> {
   final TextEditingController _componentsController = TextEditingController();
-  final List<Map<String, String>> _chatMessages = [];
+  final ApiService _apiService = ApiService();
+  List<Map<String, dynamic>> _recommendedProjects = [];
+  bool _isLoading = false;
 
-  void _fetchAIResponse() {
+  void _logApiCall(String message) {
+    debugPrint("[API LOG]: $message");
+  }
+
+  Future<void> _fetchRecommendedProjects() async {
     final userInput = _componentsController.text.trim();
     if (userInput.isEmpty) return;
 
+    setState(() => _isLoading = true);
+    _logApiCall("Fetching projects for components: $userInput");
+
+    final projects = await _apiService.searchByComponents(
+      components: userInput.split(',').map((e) => e.trim()).toList(),
+    );
+
     setState(() {
-      _chatMessages.add({"sender": "user", "message": userInput});
-      _componentsController.clear();
-      _chatMessages
-          .add({"sender": "ai", "message": "AI is processing your request..."});
+      _recommendedProjects = projects;
+      _isLoading = false;
+      _logApiCall("Received ${projects.length} projects");
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        children: [
-          TextField(
-            controller: _componentsController,
-            decoration: InputDecoration(
-              hintText: "List your available components...",
-              border: const OutlineInputBorder(),
-              suffixIcon: IconButton(
-                icon: const Icon(Icons.send, color: Colors.blue),
-                onPressed: _fetchAIResponse,
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            TextField(
+              controller: _componentsController,
+              decoration: InputDecoration(
+                labelText: "Enter Components",
+                hintText: "e.g., Arduino, Relay Module",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                suffixIcon: IconButton(
+                  icon: const Icon(Icons.search, color: Colors.blue),
+                  onPressed: _fetchRecommendedProjects,
+                ),
               ),
             ),
-          ),
-          const SizedBox(height: 16),
-          Expanded(
-            child: ListView.builder(
-              itemCount: _chatMessages.length,
-              itemBuilder: (context, index) {
-                final message = _chatMessages[index];
-                final isUser = message["sender"] == "user";
-
-                return Align(
-                  alignment:
-                      isUser ? Alignment.centerRight : Alignment.centerLeft,
-                  child: Container(
-                    margin:
-                        const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: isUser ? Colors.blue : Colors.grey.shade300,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Text(
-                      message["message"]!,
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: isUser ? Colors.white : Colors.black87,
-                      ),
-                    ),
+            const SizedBox(height: 16),
+            _isLoading
+                ? const Center(child: CircularProgressIndicator())
+                : Expanded(
+                    child: _recommendedProjects.isEmpty
+                        ? const Center(
+                            child: Text(
+                              "No projects found. Try different components.",
+                              style:
+                                  TextStyle(fontSize: 16, color: Colors.grey),
+                            ),
+                          )
+                        : ListView.builder(
+                            itemCount: _recommendedProjects.length,
+                            itemBuilder: (context, index) {
+                              final project = _recommendedProjects[index];
+                              final requiredComponents =
+                                  project["required_components"];
+                              final componentsText = requiredComponents is List
+                                  ? requiredComponents.join(", ")
+                                  : requiredComponents.toString();
+                              return Card(
+                                elevation: 3,
+                                margin: const EdgeInsets.symmetric(vertical: 6),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: ListTile(
+                                  contentPadding: const EdgeInsets.all(12),
+                                  title: Text(
+                                    project["project_description"] ??
+                                        "Unknown Project",
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16),
+                                  ),
+                                  subtitle: Text(
+                                    "Match Score: ${project["match_score"]}%",
+                                    style: const TextStyle(
+                                        fontSize: 14, color: Colors.blueGrey),
+                                  ),
+                                  trailing: SizedBox(
+                                    width: 150,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        const Text("Required Components:"),
+                                        Text(
+                                          componentsText,
+                                          style: const TextStyle(
+                                              fontSize: 12,
+                                              color: Colors.black54),
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 2,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
                   ),
-                );
-              },
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
