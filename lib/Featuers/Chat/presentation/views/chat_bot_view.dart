@@ -223,7 +223,6 @@ class ChatBotViewState extends State<ChatBotView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(context, () {}),
-      backgroundColor: Colors.white, // لون خلفية مريح
       body: Column(
         children: [
           Expanded(
@@ -288,7 +287,6 @@ class ChatBotViewState extends State<ChatBotView> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
             decoration: BoxDecoration(
-              color: Colors.white,
               borderRadius: BorderRadius.circular(30),
               boxShadow: [
                 BoxShadow(
