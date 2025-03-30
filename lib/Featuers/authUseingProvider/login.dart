@@ -56,13 +56,9 @@ class _LoginVeiwState extends State<LoginVeiw> {
 
   void fetchProjects() async {
     ApiService apiService = ApiService();
-
-    Map<String, dynamic> result = await apiService.searchProject(
+    await apiService.searchProject(
       projectDescription: "voice control car",
-      // requiredComponents: ["arduino", "relay module", "temperature sensor"],
     );
-
-    print(result); // Print response data
   }
 
   final LoginHandler loginHandler = LoginHandler(); // Instance of LoginHandler
