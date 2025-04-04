@@ -9,8 +9,8 @@ Widget buildTabBar(TabController? controller, BuildContext context) {
     color: isDarkTheme ? Colors.black : Colors.white,
     child: TabBar(
       controller: controller,
-      indicatorColor: Colors.white,
-      labelColor: Colors.white,
+      indicatorColor: Colors.black,
+      labelColor: Colors.black,
       unselectedLabelColor: Colors.grey,
       tabs: const [
         Tab(icon: Icon(IconlyLight.activity), text: "Idea to Components"),
