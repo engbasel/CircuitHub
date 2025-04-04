@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
-import 'package:store/Featuers/Nav_Bar_Pages/Presentation/Views/Widget/inner_widget/product_details_body.dart';
-import 'package:store/Core/Utils/app_name_animated_text.dart';
 import 'package:store/providers/product_provider.dart';
 
 class ProductDetails extends StatefulWidget {

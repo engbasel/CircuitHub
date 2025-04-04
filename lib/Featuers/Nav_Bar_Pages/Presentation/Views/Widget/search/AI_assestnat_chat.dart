@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -5,6 +7,7 @@ class AIAssistant extends StatefulWidget {
   const AIAssistant({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _AIAssistantState createState() => _AIAssistantState();
 
   static const routeName = 'AIAssistant';

@@ -34,6 +34,7 @@ class CategoryHomeWidget extends StatelessWidget {
         children: [
           SvgPicture.asset(
             image,
+            // ignore: deprecated_member_use
             color: isDarkTheme ? iconColorDark : iconColorWith,
             height: 50,
             width: 50,

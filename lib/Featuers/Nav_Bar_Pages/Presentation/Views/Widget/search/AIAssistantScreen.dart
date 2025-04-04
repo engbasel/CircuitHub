@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:store/Featuers/Chat/presentation/views/buildAppBar.dart';
 import 'package:store/Featuers/Nav_Bar_Pages/Presentation/Views/Widget/search/widgets/ComponentsToProjectsScreen.dart';
