@@ -1,4 +1,4 @@
-package com.example.store
+package com.example.smartstore
 
 import io.flutter.embedding.android.FlutterActivity
 
