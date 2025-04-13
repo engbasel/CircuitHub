@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:store/Featuers/Checkout/CheckoutScreen.dart';
 import 'package:store/Featuers/authUseingProvider/BlockedScreen.dart';
 import 'package:store/core/widget/custom_bottom_nav_bar.dart';
 import 'package:store/featuers/authUseingProvider/forgot_password.dart';
@@ -42,6 +43,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const RegisterScreen());
       case SplashView.routeName:
         return MaterialPageRoute(builder: (_) => const SplashView());
+      case CheckoutScreen.routeName:
+        return MaterialPageRoute(builder: (_) => const CheckoutScreen());
       case ChatBotView.routeName:
         return MaterialPageRoute(builder: (_) => const ChatBotView());
       case AIAssistant.routeName:

@@ -281,7 +281,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
         items: [
           buildBottomBarItem(Assets.Home, 'Home', isDarkTheme),
           buildBottomBarItem(Assets.search, 'Search', isDarkTheme),
-          buildBottomBarItem(Assets.favorites, 'Favorites', isDarkTheme),
+          buildBottomBarItem(Assets.favorites, 'Orders', isDarkTheme),
           buildBottomBarItem(Assets.Profile, 'Profile', isDarkTheme),
         ],
         hasNotch: true,
